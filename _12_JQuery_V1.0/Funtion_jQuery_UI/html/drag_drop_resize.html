@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../css/jquery-ui.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="../css/drag_drop_resize.css"/>
+    <script src="../lib/jquery-1.12.4.js"></script>
+    <script src="../lib/jquery-ui.js"></script>
+    <meta charset="UTF-8">
+
+    <title>Jquery UI</title>
+</head>
+<script>
+    $(function () {
+        $("#draggable").draggable();
+        $("#droppable").droppable({
+            drop: function (event, ui) {
+                $(this)
+                    .addClass("ui-state-highlight")
+                    .find("p")
+                    .html("Dropped!");
+            }
+        });
+        $("#resizable").resizable(
+            {   //animate:true,
+                containment: "#container",
+                //helper
+                helper: "ui-resizable-helper",
+                //max and min size
+                maxHeight: 400,
+                maxWidth: 400,
+                minHeight: 150,
+                minWidth: 200,
+                //keep ratio
+                aspectRatio: 3/4,
+                //also resize according to resizable
+                alsoResize:"#also",
+                //show a semi-transparent part of the element.
+                ghost:true
+            }
+        );
+        $( "#also" ).resizable();
+    });
+    $( function() {
+        $( "#resizable1" ).resizable({
+            handles: "se"
+        });
+    } );
+</script>
+<body>
+<h3>Draggable</h3>
+<div id="draggable" class="ui-widget-content">
+    <p>Drag me around</p>
+</div>
+<h3>Droppable</h3>
+<div id="droppable" class="ui-widget-header">
+    <p>Drop here</p>
+</div>
+<h3>Resizable</h3>
+<div id="container" class="ui-widget-content">
+    <h3 class="ui-widget-header">Containment</h3>
+    <div id="resizable" class="ui-widget-content">
+        <h3 class="ui-widget-header">Animate</h3>
+    </div>
+</div>
+<div id="also" class="ui-widget-content">
+    <h3 class="ui-widget-header">will also resize</h3>
+</div>
+<h3>Resize textarea</h3>
+<textarea id="resizable1" rows="5" cols="20"></textarea>
+
+
+</body>
+</html>
